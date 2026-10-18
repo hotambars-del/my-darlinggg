@@ -1,0 +1,785 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#270e20">
+  <title>For My Favourite Person ✨</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+    :root {
+      --gold: #e9c58a;
+      --rose: #d68caa;
+      --cream: #fff0dc;
+      --dark: #270e20;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(ellipse at 50% 0%, #6e304f 0%, transparent 45%),
+        linear-gradient(160deg, #160b18, #35142c 55%, #180b1b);
+      color: var(--cream);
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+    }
+
+    #particles {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .sparkle {
+      position: absolute;
+      color: var(--gold);
+      animation: twinkle ease-in-out infinite alternate;
+      text-shadow: 0 0 12px #f9dba5;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(100% - 30px, 760px);
+      margin: auto;
+      padding: 45px 0 55px;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero-heart {
+      display: inline-block;
+      font-size: 54px;
+      filter: drop-shadow(0 0 18px #e875a0);
+      animation: heartbeat 2s infinite;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 500;
+    }
+
+    h1 {
+      font-size: clamp(43px, 9vw, 76px);
+      line-height: 0.98;
+      margin: 22px 0 16px;
+      background: linear-gradient(110deg, #fff2d4, #e9c58a, #fff6e8, #cf91b0);
+      background-size: 250% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: goldShimmer 6s linear infinite;
+    }
+
+    .intro {
+      max-width: 500px;
+      margin: 0 auto;
+      color: #f2dce7;
+      font-size: 13px;
+      line-height: 2;
+      font-weight: 300;
+    }
+
+    .ornament {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      color: var(--gold);
+      margin: 30px 0;
+      font-size: 14px;
+    }
+
+    .ornament::before,
+    .ornament::after {
+      content: "";
+      height: 1px;
+      width: 70px;
+      background: linear-gradient(90deg, transparent, var(--gold));
+    }
+
+    .ornament::after {
+      transform: rotate(180deg);
+    }
+
+    .section-title {
+      font-size: clamp(32px, 7vw, 44px);
+      color: var(--gold);
+      margin: 12px 0;
+    }
+
+    .section-subtitle {
+      color: #e6cbd9;
+      font-size: 12px;
+      line-height: 1.9;
+      margin: 0 auto 25px;
+    }
+
+    .reason-card {
+      position: relative;
+      padding: 25px 22px;
+      margin: 16px 0;
+      text-align: left;
+      border: 1px solid rgba(233, 197, 138, 0.36);
+      border-radius: 4px 22px 4px 22px;
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.075),
+        rgba(255,255,255,0.018)
+      );
+      box-shadow: 0 12px 38px rgba(0,0,0,0.14);
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s, transform 0.8s, border-color 0.3s;
+    }
+
+    .reason-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reason-card:hover {
+      border-color: var(--gold);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 12px;
+    }
+
+    .card-icon {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      border: 1px solid rgba(233,197,138,0.55);
+      border-radius: 50%;
+      color: var(--gold);
+      font-size: 23px;
+      background: rgba(233,197,138,0.07);
+    }
+
+    .reason-card h3 {
+      color: #f4d7e5;
+      font-size: 26px;
+      margin: 0;
+    }
+
+    .reason-card p {
+      color: #e6ceda;
+      font-size: 12px;
+      line-height: 2;
+      font-weight: 300;
+      margin: 0;
+    }
+
+    .wish-section {
+      margin-top: 65px;
+      padding: 30px 20px;
+      border: 1px solid rgba(233,197,138,0.6);
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(214,140,170,0.15), transparent 65%),
+        rgba(255,255,255,0.035);
+      box-shadow: 0 0 50px rgba(214,140,170,0.08);
+      border-radius: 5px 30px 5px 30px;
+    }
+
+    .wish-moon {
+      font-size: 43px;
+      display: inline-block;
+      animation: moonGlow 3s ease-in-out infinite;
+    }
+
+    .wish-section h2 {
+      font-size: clamp(35px, 8vw, 48px);
+      color: var(--gold);
+      margin: 10px 0;
+    }
+
+    .wish-section > p {
+      font-size: 12px;
+      line-height: 2;
+      color: #e9d3df;
+    }
+
+    .wish-form {
+      text-align: left;
+      margin-top: 25px;
+    }
+
+    .wish-form label {
+      display: block;
+      margin: 17px 0 8px;
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    select, textarea {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid rgba(233,197,138,0.45);
+      border-radius: 3px 13px 3px 13px;
+      background: #32182d;
+      color: #fff0dc;
+      font: inherit;
+      font-size: 13px;
+      outline: none;
+    }
+
+    select:focus, textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 15px rgba(233,197,138,0.12);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 115px;
+    }
+
+    textarea::placeholder {
+      color: #c3a6b8;
+    }
+
+    .lux-button {
+      display: inline-block;
+      width: 100%;
+      padding: 15px 18px;
+      margin-top: 20px;
+      border: 1px solid #f4d9a4;
+      border-radius: 3px 18px 3px 18px;
+      background: linear-gradient(110deg, #e9c58a, #f7e3bb, #d6a96e);
+      color: #35152b;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 0 22px rgba(233,197,138,0.12);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .lux-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 28px rgba(233,197,138,0.25);
+    }
+
+    .wish-result {
+      display: none;
+      margin-top: 25px;
+      padding: 22px 16px;
+      border: 1px solid rgba(233,197,138,0.45);
+      background: rgba(0,0,0,0.14);
+      animation: reveal 0.8s ease both;
+    }
+
+    .wish-result.show {
+      display: block;
+    }
+
+    .wish-result h3 {
+      color: var(--gold);
+      font-size: 30px;
+      margin: 0 0 12px;
+    }
+
+    #displayWish {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      color: #fff0dc;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .love-message {
+      color: #f3d9e5;
+      font-size: 13px;
+      line-height: 2.1;
+      margin: 35px auto;
+      max-width: 470px;
+    }
+
+    .signature {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 30px;
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .navigation {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 35px;
+    }
+
+    .nav-link {
+      display: inline-block;
+      padding: 13px 18px;
+      text-decoration: none;
+      color: var(--gold);
+      border: 1px solid rgba(233,197,138,0.55);
+      font-size: 11px;
+      border-radius: 3px 14px 3px 14px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .nav-link:hover {
+      background: var(--gold);
+      color: var(--dark);
+    }
+
+    .footer {
+      margin-top: 45px;
+      color: #c6a7ba;
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.13); }
+    }
+
+    @keyframes goldShimmer {
+      to { background-position: 250% center; }
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.15; transform: scale(0.7) rotate(0); }
+      to { opacity: 0.9; transform: scale(1.3) rotate(45deg); }
+    }
+
+    @keyframes moonGlow {
+      0%, 100% { filter: drop-shadow(0 0 5px #e9c58a); }
+      50% { filter: drop-shadow(0 0 22px #e9c58a); }
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(15px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        width: min(100% - 24px, 760px);
+        padding-top: 35px;
+      }
+
+      .eyebrow {
+        letter-spacing: 3px;
+        font-size: 9px;
+      }
+
+      .reason-card {
+        padding: 20px 16px;
+      }
+
+      .reason-card h3 {
+        font-size: 23px;
+      }
+
+      .wish-section {
+        padding: 25px 15px;
+        margin-top: 45px;
+      }
+
+      .navigation {
+        flex-direction: column;
+      }
+
+      .nav-link {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+
+      .reason-card {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+  
+/* Star-to-universe wish animation */
+.wish-universe {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(circle, #30104b, #090014 75%);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.wish-universe.active {
+  display: flex;
+  animation: universeAppear 1s ease;
+}
+
+.wish-galaxy {
+    
+.wish-universe .sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #fff4bd;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ffd875, 0 0 20px #ff9bea;
+  animation: sparkleFloat 2s ease-in-out infinite alternate;
+}
+
+@keyframes sparkleFloat {
+  from {
+    opacity: 0.2;
+    transform: scale(0.5) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.8) translateY(-20px);
+  }
+}
+
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 20px #fff, 0 0 60px #ffb6f9;
+  animation: galaxyExpand 3s ease forwards;
+}
+
+.universe-caption {
+  color: #ffe6a8;
+  font-size: 22px;
+  text-align: center;
+  margin: 25px;
+  opacity: 0;
+  animation: captionAppear 1s ease 2s forwards;
+}
+
+@keyframes universeAppear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes galaxyExpand {
+  0% { transform: scale(1); }
+  50% { transform: scale(8); }
+  100% { transform: scale(15); opacity: 0.2; }
+}
+
+@keyframes captionAppear {
+  to { opacity: 1; }
+}
+
+</style>
+</head>
+
+<body>
+  <div id="particles" aria-hidden="true"></div>
+
+  <main class="page">
+    <div class="eyebrow">A little universe made for you</div>
+
+    <div class="hero-heart">💗</div>
+
+    <h1>My Favourite<br>Person</h1>
+
+    <p class="intro">
+      If I could give you one thing in this world,
+      it would be the ability to see yourself through my eyes.
+      Then you'd understand why you're so special to me. ✨
+    </p>
+
+    <div class="ornament">✧ ♡ ✧</div>
+
+    <h2 class="section-title">Why I Adore You</h2>
+    <p class="section-subtitle">
+      Little things about you that mean everything to me.
+    </p>
+
+    <section class="reason-card">
+      <div class="card-top">
+        <div class="card-icon">♡</div>
+        <h3>Your Smile</h3>
+      </div>
+      <p>
+        There's something magical about your smile.
+        It makes ordinary moments feel beautiful
+        and reminds me how lucky I am to know you.
+      </p>
+    </section>
+
+    <section class="reason-card">
+      <div class="card-top">
+        <div class="card-icon">✧</div>
+        <h3>Your Heart</h3>
+      </div>
+      <p>
+        The kindness you show, the little things you notice,
+        and the way you care make you more precious
+        than you could ever imagine.
+      </p>
+    </section>
+
+    <section class="reason-card">
+      <div class="card-top">
+        <div class="card-icon">❀</div>
+        <h3>Your Beautiful Soul</h3>
+      </div>
+      <p>
+        You don't have to be perfect, and you never have
+        to pretend to be someone else. I love the little
+        things that make you uniquely you.
+      </p>
+    </section>
+
+    <section class="reason-card">
+      <div class="card-top">
+        <div class="card-icon">∞</div>
+        <h3>Our Memories</h3>
+      </div>
+      <p>
+        Every laugh, every silly conversation, every
+        little moment we share becomes a memory
+        I want to keep close to my heart.
+      </p>
+    </section>
+
+    <section class="wish-section" id="make-a-wish">
+      <div class="wish-moon">🌙</div>
+      <div class="eyebrow">Close your eyes and dream</div>
+
+      <h2>Make a Wish,<br>My Love</h2>
+
+      <p>
+        If the universe could grant you one wish tonight,
+        what would your heart ask for? ✨
+      </p>
+
+      <form class="wish-form" id="wishForm">
+        <label for="wishType">YOUR LITTLE WISH</label>
+        <select id="wishType">
+          <option value="dream">A dream I want to achieve 🌟</option>
+          <option value="love">Something for our love 💗</option>
+          <option value="happiness">A little more happiness 🦋</option>
+          <option value="surprise">A secret wish 🤫</option>
+        </select>
+
+        <label for="wishText">TELL ME WHAT YOUR HEART WANTS</label>
+        <textarea
+          id="wishText"
+          maxlength="500"
+          placeholder="Write your wish here, Darlingg..."
+          required
+        ></textarea>
+
+        <button class="lux-button" type="submit">
+          ✨ MAKE MY WISH COME TRUE ✨
+        </button>
+      </form>
+      
+<div class="wish-universe" id="wishUniverse" aria-hidden="true">
+  <div class="universe-message">YOUR WISH IS TRAVELLING TO THE UNIVERSE ✨</div>
+  <div class="wish-galaxy">
+    <div class="galaxy-ring"></div>
+    <div class="wish-star">★</div>
+    <div class="wish-trail"></div>
+  </div>
+  <p class="universe-caption">May the universe hear your heart... 💫</p>
+</div>
+   
+      <div class="wish-result" id="wishResult" aria-live="polite">
+        <h3>Your Wish Is Beautiful 💖</h3>
+        <p id="displayWish"></p>
+        <p id="wishPromise">
+          I hope life brings you beautiful surprises,
+          little reasons to smile, and all the happiness
+          your heart deserves. ✨
+        </p>
+        <div class="signature">With all my love ♡</div>
+      </div>
+    </section>
+
+    <p class="love-message">
+      And if there's one thing I wish for, it's that
+      I never make you doubt how much you matter to me.
+      You deserve patience, honesty, laughter, and love
+      that makes you feel safe. 💌
+    </p>
+
+    <div class="ornament">✧ ♡ ✧</div>
+
+    <div class="navigation">
+      <a class="nav-link" href="index.html">← BACK TO PAGE 1</a>
+      <a class="nav-link" href="page3.html">CONTINUE OUR STORY →</a>
+    </div>
+
+    <footer class="footer">
+      MADE WITH LOVE, JUST FOR YOU ♡
+    </footer>
+  </main>
+
+  <script>
+    // Create gentle, glowing background sparkles.
+    const particles = document.getElementById("particles");
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (!reducedMotion) {
+      for (let i = 0; i < 45; i++) {
+        const sparkle = document.createElement("span");
+        sparkle.className = "sparkle";
+        sparkle.textContent = Math.random() > 0.5 ? "✦" : "·";
+        sparkle.style.left = Math.random() * 100 + "%";
+        sparkle.style.top = Math.random() * 100 + "%";
+        sparkle.style.fontSize = (7 + Math.random() * 12) + "px";
+        sparkle.style.animationDuration = (2 + Math.random() * 4) + "s";
+        sparkle.style.animationDelay = Math.random() * 4 + "s";
+        particles.appendChild(sparkle);
+      }
+    }
+
+    // Reveal each reason card as it enters view.
+    const cards = document.querySelectorAll(".reason-card");
+
+    if ("IntersectionObserver" in window && !reducedMotion) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      cards.forEach((card, index) => {
+        card.style.transitionDelay = (index * 100) + "ms";
+        observer.observe(card);
+      });
+    } else {
+      cards.forEach(card => card.classList.add("visible"));
+    }
+
+    // Show her wish as a little romantic surprise.
+    const wishForm = document.getElementById("wishForm");
+    const wishText = document.getElementById("wishText");
+    const wishType = document.getElementById("wishType");
+    const wishResult = document.getElementById("wishResult");
+    const displayWish = document.getElementById("displayWish");
+    const wishPromise = document.getElementById("wishPromise");
+
+    const promises = {
+      dream: "May you have the courage to chase your dreams, the strength to keep going, and a thousand reasons to be proud of yourself. 🌟",
+      love: "May our love grow with kindness, honesty, patience, and countless beautiful memories. 💗",
+      happiness: "May your days hold unexpected joy, peaceful moments, genuine laughter, and all the little things that make you happy. 🦋",
+      surprise: "Some wishes are too special for words. I hope a beautiful surprise finds its way to you when you least expect it. 🤫"
+    };
+
+   
+wishForm.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const wish = wishText.value.trim();
+  if (!wish) {
+    wishText.focus();
+    return;
+  }
+
+  displayWish.textContent = "“" + wish + "”";
+  wishPromise.textContent = promises[wishType.value];
+
+  // Show the wish result
+  wishResult.classList.remove("show");
+  void wishResult.offsetWidth;
+  wishResult.classList.add("show");
+
+  // Create the universe animation
+  const universe = document.getElementById("wishUniverse");
+
+  if (universe) {
+    universe.replaceChildren();
+
+    const star = document.createElement("div");
+    star.className = "wish-galaxy";
+    universe.appendChild(star);
+    
+for (let i = 0; i < 45; i++) {
+  const sparkle = document.createElement("span");
+  sparkle.className = "sparkle";
+  sparkle.style.left = Math.random() * 100 + "%";
+  sparkle.style.top = Math.random() * 100 + "%";
+  sparkle.style.animationDelay = Math.random() * 2 + "s";
+  universe.appendChild(sparkle);
+}
+
+
+    const caption = document.createElement("div");
+    caption.className = "universe-caption";
+    caption.textContent = "Your wish is travelling to the universe ✨💖";
+    universe.appendChild(caption);
+
+    universe.classList.add("active");
+
+    // Hide the animation after 4 seconds
+    setTimeout(function() {
+      universe.classList.remove("active");
+      universe.replaceChildren();
+    }, 4000);
+  }
+
+  wishResult.scrollIntoView({
+    behavior: reducedMotion ? "auto" : "smooth",
+    block: "center"
+  });
+});
+
+  
+const wishUniverse = document.getElementById("wishUniverse");
+
+if (wishUniverse) {
+  wishUniverse.addEventListener("click", function () {
+    wishUniverse.classList.remove("active");
+  });
+}
+
+  </script>
+</body>
+</html>

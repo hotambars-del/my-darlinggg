@@ -1,0 +1,538 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Heart Is Only Yours, Sonam ❤️</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(ellipse at center, #300014 0%, #100008 60%, #000 100%);
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 8px 25px;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      color: #ffb1c9;
+      text-align: center;
+      font-size: clamp(25px, 5vw, 38px);
+      text-shadow: 0 0 10px #ff174f, 0 0 25px #ff174f;
+      margin: 8px 0;
+    }
+
+    .subtitle {
+      color: #ffd0df;
+      text-align: center;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
+    canvas {
+      width: min(96vw, 620px);
+      height: min(58vh, 470px);
+      min-height: 270px;
+      display: block;
+      visibility: hidden;
+    }
+
+    .love-message {
+      max-width: 460px;
+      text-align: center;
+      color: #ffd4e1;
+      line-height: 1.8;
+      font-size: 14px;
+      padding: 0 12px;
+      margin: 0 0 18px;
+      text-shadow: 0 0 8px #ff174f66;
+      visibility: hidden;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      visibility: hidden;
+    }
+
+    button {
+      padding: 13px 21px;
+      border: 1px solid #ff83a5;
+      border-radius: 30px;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      background: linear-gradient(135deg, #ff3268, #a9003a);
+      box-shadow: 0 0 18px #ff174f66;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px #ff174faa;
+    }
+
+    .back {
+      background: transparent;
+    }
+
+    /* Opening surprise screen */
+    #intro {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 25px;
+      text-align: center;
+      background: radial-gradient(circle at center, #3a001b, #14000b 55%, #030003);
+      transition: opacity 1s ease;
+      overflow: hidden;
+    }
+
+    #intro h1 {
+      font-size: clamp(30px, 7vw, 46px);
+    }
+
+    #intro p {
+      color: #ffd1df;
+      font-size: clamp(17px, 4vw, 23px);
+      line-height: 1.5;
+    }
+
+    #intro .small {
+      color: #ff9fbd;
+      font-size: 14px;
+    }
+
+    .intro-heart {
+      font-size: 78px;
+      filter: drop-shadow(0 0 20px #ff174f);
+      animation: heartbeat 1.2s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.16); }
+    }
+
+    .floating-heart {
+      position: absolute;
+      bottom: -35px;
+      color: #ff507f;
+      opacity: 0;
+      pointer-events: none;
+      animation: floatUp 7s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      15% { opacity: .7; }
+      85% { opacity: .5; }
+      100% {
+        transform: translateY(-110vh) rotate(35deg);
+        opacity: 0;
+      }
+    }
+
+    #openHeart {
+      padding: 16px 27px;
+      font-size: 16px;
+      animation: buttonGlow 2s infinite alternate;
+    }
+
+    @keyframes buttonGlow {
+      from { box-shadow: 0 0 12px #ff174f55; }
+      to { box-shadow: 0 0 30px #ff174f; }
+    }
+
+    @media (max-width: 480px) {
+      canvas {
+        width: 96vw;
+        height: 48vh;
+        min-height: 260px;
+      }
+
+      .love-message {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- FIRST SCREEN -->
+  <section id="intro">
+    <div class="intro-heart">❤️</div>
+
+    <h1>Sonam, 💗</h1>
+
+    <p>Do you want to see inside my heart?</p>
+
+    <p class="small">
+      Every little piece of my heart belongs to you ✨
+    </p>
+
+    <button id="openHeart">💖 Open My Heart 💖</button>
+  </section>
+
+  <!-- HEART SCREEN -->
+  <h1 id="heartTitle">My Heart Is Only Yours ❤️</h1>
+
+  <p class="subtitle" id="subtitle">
+    Every word, every beat, every part of my heart is YOU, Sonam. ✨
+  </p>
+
+  <canvas id="heart"></canvas>
+
+  <p class="love-message" id="loveMessage">
+    Sonam, my heart is filled with you and you only. ❤️<br>
+    There is no one else I want in this little world of mine.<br>
+    Every heartbeat whispers your name.<br>
+    You are my favourite person, my happiness, my everything.<br>
+    I'm sorry for the moments I hurt you.<br>
+    If my heart could speak, it would say only one name: SONAM. 💗<br>
+    <strong>YOU AND ONLY YOU. ALWAYS. FOREVER. ❤️</strong>
+  </p>
+
+  <div class="buttons" id="buttons">
+    <button id="replay">💗 Replay My Heart</button>
+
+    <button class="back" onclick="location.href='page3.html'">
+      ← Back to Memories
+    </button>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("heart");
+    const ctx = canvas.getContext("2d");
+
+    const intro = document.getElementById("intro");
+    const openHeartButton = document.getElementById("openHeart");
+
+    const heartTitle = document.getElementById("heartTitle");
+    const subtitle = document.getElementById("subtitle");
+    const loveMessage = document.getElementById("loveMessage");
+    const buttons = document.getElementById("buttons");
+
+    // Love messages that fill the heart.
+    const phrases = [
+      "MY HEART IS FILLED WITH YOU",
+      "YOU AND ONLY YOU SONAM",
+      "MY HEART BELONGS TO YOU",
+      "ONLY YOU LIVE IN MY HEART",
+      "MY HEART IS FULL OF YOU",
+      "SONAM AND ONLY SONAM",
+      "THERE IS ONLY YOU",
+      "MY HEART BEATS FOR YOU",
+      "YOU ARE MY EVERYTHING",
+      "MY HEART CHOOSES YOU",
+      "ONLY YOU FOREVER",
+      "MY LOVE IS ONLY YOURS",
+      "MY HEART IS YOURS",
+      "NO ONE BUT YOU",
+      "YOU FILL MY WHOLE HEART",
+      "MY WORLD IS YOU",
+      "YOU ARE MY ONE AND ONLY",
+      "MY HEART HAS ONLY YOU",
+      "EVERY BEAT SAYS YOUR NAME",
+      "YOU ARE MY FOREVER",
+      "ALL MY LOVE IS YOURS",
+      "MY HEART IS FULL OF SONAM",
+      "SONAM YOU ARE MY EVERYTHING",
+      "ONLY YOU IN MY HEART",
+      "YOU AND ME FOREVER",
+      "MY HEART IS YOUR HOME",
+      "MY SOUL CHOOSES YOU",
+      "I LOVE ONLY YOU",
+      "YOU ARE MY HAPPINESS",
+      "MY HEART IS FILLED WITH YOU",
+      "TUM HI MERA PYAAR HO",
+      "MERA DIL SIRF TUMHARA HAI",
+      "SIRF TUM SONAM",
+      "TUM HI MERI DUNIYA HO",
+      "MERA DIL TUMSE BHARA HAI",
+      "TE AMO SOLO A TI",
+      "MON COEUR EST À TOI",
+      "MI CORAZON ES TUYO",
+      "JE T'AIME SONAM",
+      "ICH LIEBE DICH",
+      "MY HEART IS FILLED WITH YOU",
+      "YOU AND ONLY YOU",
+      "SONAM ❤️ SONAM ❤️ SONAM",
+      "ONLY YOU, ALWAYS YOU",
+      "YOU ARE MY ONE AND ONLY",
+      "MY HEART HAS NO OTHER",
+      "YOU ARE MY TODAY AND TOMORROW",
+      "MY HEART IS FILLED WITH YOU"
+    ];
+
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let heartPath = new Path2D();
+    let scale = 1;
+    let centerX = 0;
+    let centerY = 0;
+    let animationId = 0;
+    let startTime = 0;
+    let revealed = false;
+
+    function makeHeartPath() {
+      heartPath = new Path2D();
+
+      for (let i = 0; i <= 720; i++) {
+        const t = (i / 720) * Math.PI * 2;
+
+        const x = 16 * Math.pow(Math.sin(t), 3);
+
+        const y =
+          13 * Math.cos(t) -
+          5 * Math.cos(2 * t) -
+          2 * Math.cos(3 * t) -
+          Math.cos(4 * t);
+
+        const px = centerX + x * scale / 18;
+        const py = centerY - y * scale / 18;
+
+        if (i === 0) {
+          heartPath.moveTo(px, py);
+        } else {
+          heartPath.lineTo(px, py);
+        }
+      }
+
+      heartPath.closePath();
+    }
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+
+      width = rect.width;
+      height = rect.height;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      // Keeps the heart small enough to leave space for sparkles.
+      scale = Math.min(width * 0.67, height * 0.67);
+      centerX = width / 2;
+      centerY = height / 2;
+
+      makeHeartPath();
+
+      if (revealed) {
+        replayAnimation();
+      }
+    }
+
+    function drawHeart(elapsed) {
+      ctx.clearRect(0, 0, width, height);
+
+      ctx.save();
+      ctx.clip(heartPath);
+
+      const fontSize = Math.max(5.5, Math.min(9, scale * 0.025));
+      const lineHeight = fontSize * 1.7;
+      const revealDuration = 3.2;
+
+      ctx.font = `bold ${fontSize}px Arial, sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      let row = 0;
+
+      for (
+        let y = centerY - scale * 0.98;
+        y <= centerY + scale * 0.98;
+        y += lineHeight
+      ) {
+        const totalRows = Math.max(1, (scale * 1.96) / lineHeight);
+        const rowDelay = (row / totalRows) * revealDuration;
+
+        const opacity = Math.max(
+          0,
+          Math.min(1, (elapsed - rowDelay) / 0.18)
+        );
+
+        if (opacity > 0) {
+          ctx.globalAlpha = opacity;
+
+          let x = -width + (row % 2 ? fontSize * 2 : 0);
+          let phraseIndex = row * 3;
+
+          while (x < width * 2) {
+            const phrase = phrases[phraseIndex % phrases.length];
+
+            ctx.shadowColor = "#ff174f";
+            ctx.shadowBlur = 8;
+
+            if (phraseIndex % 3 === 0) {
+              ctx.fillStyle = "#ff315f";
+            } else if (phraseIndex % 3 === 1) {
+              ctx.fillStyle = "#ff8eae";
+            } else {
+              ctx.fillStyle = "#ffd0df";
+            }
+
+            ctx.fillText(phrase, x, y);
+
+            x += ctx.measureText(phrase).width + fontSize * 1.1;
+            phraseIndex++;
+          }
+        }
+
+        row++;
+      }
+
+      ctx.restore();
+
+      // Glowing outline of the heart.
+      ctx.save();
+      ctx.globalAlpha = Math.min(1, elapsed / 1.5);
+      ctx.strokeStyle = "#ff426f";
+      ctx.lineWidth = 1.5;
+      ctx.shadowColor = "#ff174f";
+      ctx.shadowBlur = 18;
+      ctx.stroke(heartPath);
+      ctx.restore();
+    }
+
+    function drawSparkles(elapsed) {
+      for (let i = 0; i < 42; i++) {
+        const x = (i * 83.17) % width;
+        const y = (i * 57.31) % height;
+
+        const twinkle =
+          (Math.sin(elapsed * 3.5 + i * 1.7) + 1) / 2;
+
+        const size = 0.6 + twinkle * 1.8;
+
+        ctx.save();
+        ctx.globalAlpha = 0.15 + twinkle * 0.85;
+        ctx.fillStyle = i % 3 === 0 ? "#ffffff" : "#ff9fbd";
+        ctx.shadowColor = "#ff4d85";
+        ctx.shadowBlur = 8 + twinkle * 9;
+
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (i % 5 === 0) {
+          ctx.beginPath();
+          ctx.moveTo(x, y - size * 3);
+          ctx.lineTo(x + size * 0.6, y);
+          ctx.lineTo(x, y + size * 3);
+          ctx.lineTo(x - size * 0.6, y);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        ctx.restore();
+      }
+    }
+
+    function animate(timestamp) {
+      if (!startTime) {
+        startTime = timestamp;
+      }
+
+      const elapsed = (timestamp - startTime) / 1000;
+
+      drawHeart(elapsed);
+      drawSparkles(elapsed);
+
+      animationId = requestAnimationFrame(animate);
+    }
+
+    function replayAnimation() {
+      cancelAnimationFrame(animationId);
+      startTime = 0;
+
+      if (revealed) {
+        animationId = requestAnimationFrame(animate);
+      }
+    }
+
+    function addFloatingHearts() {
+      for (let i = 0; i < 14; i++) {
+        const heart = document.createElement("span");
+
+        heart.className = "floating-heart";
+        heart.textContent = i % 2 === 0 ? "♥" : "✦";
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.animationDelay = Math.random() * 7 + "s";
+        heart.style.animationDuration =
+          (5 + Math.random() * 5) + "s";
+        heart.style.fontSize =
+          (12 + Math.random() * 18) + "px";
+
+        intro.appendChild(heart);
+      }
+    }
+
+    openHeartButton.addEventListener("click", () => {
+      if (revealed) return;
+
+      revealed = true;
+      intro.style.opacity = "0";
+      intro.style.pointerEvents = "none";
+
+      setTimeout(() => {
+        intro.style.display = "none";
+
+        heartTitle.style.visibility = "visible";
+        subtitle.style.visibility = "visible";
+        canvas.style.visibility = "visible";
+        loveMessage.style.visibility = "visible";
+        buttons.style.visibility = "visible";
+
+        resizeCanvas();
+        replayAnimation();
+      }, 850);
+    });
+
+    document.getElementById("replay").addEventListener("click", () => {
+      replayAnimation();
+    });
+
+    window.addEventListener("resize", resizeCanvas);
+
+    addFloatingHearts();
+    resizeCanvas();
+
+    // Hide the heart and its messages until Sonam opens it.
+    heartTitle.style.visibility = "hidden";
+    subtitle.style.visibility = "hidden";
+    canvas.style.visibility = "hidden";
+    loveMessage.style.visibility = "hidden";
+    buttons.style.visibility = "hidden";
+  </script>
+
+</body>
+</html>

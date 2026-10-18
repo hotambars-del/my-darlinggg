@@ -1,0 +1,549 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Little Surprise for You 💗</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --rose: #f3a5c1;
+      --gold: #e8c18a;
+      --cream: #fff0f5;
+      --dark: #10060d;
+      --wine: #3b1025;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--cream);
+      font-family: 'Poppins', sans-serif;
+      background:
+        radial-gradient(ellipse at top, #50172f 0%, transparent 50%),
+        linear-gradient(145deg, #10060d, #210b18 55%, #0b050a);
+    }
+
+    /* Animated star background */
+    .stars {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: #ffd7e7;
+      border-radius: 50%;
+      opacity: 0.45;
+      animation: twinkle 3s infinite ease-in-out;
+      box-shadow: 0 0 8px #ff9bc6;
+    }
+
+    @keyframes twinkle {
+      0%, 100% {
+        opacity: 0.15;
+        transform: scale(0.7);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.5);
+      }
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(100% - 30px, 900px);
+      margin: auto;
+      padding: 45px 0 60px;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 13px;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+    }
+
+    .main-title {
+      text-align: center;
+      font-size: clamp(38px, 8vw, 66px);
+      line-height: 1.05;
+      color: #fff0f5;
+      text-shadow: 0 0 30px #ef8bb455;
+      animation: fadeUp 1s ease both;
+    }
+
+    .main-title span {
+      color: var(--rose);
+      font-style: italic;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #d8b8c7;
+      font-size: 13px;
+      margin-top: 15px;
+      line-height: 1.8;
+    }
+
+    .divider {
+      width: 95px;
+      height: 1px;
+      margin: 27px auto;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    /* Photo cards */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin: 35px 0 55px;
+    }
+
+    .photo-card {
+      padding: 11px;
+      border: 1px solid #d6a16d88;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #ffffff12, #ffffff04);
+      box-shadow: 0 12px 35px #00000035;
+      transition: transform 0.4s, box-shadow 0.4s;
+      animation: fadeUp 1s ease both;
+    }
+
+    .photo-card:hover {
+      transform: translateY(-8px) rotate(-1deg);
+      box-shadow: 0 15px 35px #e88bb833;
+    }
+
+    .photo-card:nth-child(2):hover {
+      transform: translateY(-8px) rotate(1deg);
+    }
+
+    .photo-card img {
+  display: block;
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 11px;
+  background: #2a1020;
+}
+
+    .photo-caption {
+      text-align: center;
+      padding: 13px 5px 5px;
+      color: #f6c6d9;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      font-style: italic;
+    }
+
+    /* Surprise card */
+    .surprise-card {
+      max-width: 650px;
+      margin: 0 auto 40px;
+      padding: 30px 22px;
+      text-align: center;
+      background: linear-gradient(145deg, #351023, #160711);
+      border: 1px solid #d8a06b;
+      border-radius: 24px;
+      box-shadow: 0 0 35px #e6a0bd15;
+      animation: fadeUp 1s ease both;
+    }
+
+    .surprise-rose {
+      font-size: 58px;
+      filter: drop-shadow(0 0 15px #f18bb855);
+      animation: roseFloat 2.5s ease-in-out infinite;
+    }
+
+    @keyframes roseFloat {
+      0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+      }
+      50% {
+        transform: translateY(-10px) rotate(5deg);
+      }
+    }
+
+    .surprise-card h2 {
+      color: var(--gold);
+      font-size: clamp(30px, 6vw, 42px);
+      margin: 10px 0;
+    }
+
+    .surprise-card p {
+      color: #e8cbd8;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .surprise-btn {
+      padding: 14px 25px;
+      margin-top: 22px;
+      border: 1px solid #f4c6d8;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #b83263, #7d1945);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 0 20px #e875a322;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .surprise-btn:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 28px #ff8bb866;
+    }
+
+    /* Video reveal */
+    .hidden {
+      display: none !important;
+    }
+
+    #surpriseContent {
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .video-frame {
+      width: 100%;
+      margin: 22px auto;
+      overflow: hidden;
+      border: 2px solid var(--gold);
+      border-radius: 17px;
+      background: #080308;
+      box-shadow: 0 0 30px #f18bb833;
+      animation: videoAppear 0.8s ease both;
+    }
+
+    .video-frame video {
+      display: block;
+      width: 100%;
+      max-height: 450px;
+      background: #080308;
+      object-fit: contain;
+    }
+
+    .video-caption {
+      color: #ffc3d8 !important;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px !important;
+      font-style: italic;
+    }
+
+    .love-message {
+      margin-top: 18px;
+      line-height: 2 !important;
+    }
+
+    @keyframes videoAppear {
+      from {
+        opacity: 0;
+        transform: scale(0.92);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Floating hearts */
+    .floating-heart {
+      position: fixed;
+      bottom: -30px;
+      z-index: 10;
+      pointer-events: none;
+      animation: floatHeart 4s ease-in forwards;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0);
+      }
+      15% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-105vh) rotate(35deg);
+      }
+    }
+
+    /* Navigation */
+    .navigation {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 35px;
+    }
+
+    .nav-link {
+      display: inline-block;
+      text-decoration: none;
+      color: #fce5ee;
+      border: 1px solid #d8a06b88;
+      border-radius: 30px;
+      padding: 11px 20px;
+      font-size: 12px;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .nav-link:hover {
+      background: #ffffff12;
+      transform: translateY(-3px);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 45px;
+      color: #b995a7;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-style: italic;
+    }
+
+    @media (max-width: 550px) {
+      .page {
+        width: min(100% - 22px, 900px);
+        padding-top: 32px;
+      }
+
+      .photo-grid {
+        gap: 12px;
+        margin: 25px 0 40px;
+      }
+
+      .photo-card {
+        padding: 7px;
+      }
+
+      .photo-card img {
+        height: 200x;
+      }
+
+      .photo-caption {
+        font-size: 17px;
+      }
+
+      .surprise-card {
+        padding: 25px 14px;
+      }
+
+      .video-frame video {
+        max-height: 350px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stars" id="stars"></div>
+
+  <main class="page">
+    <p class="eyebrow">A little piece of my heart</p>
+
+    <h1 class="main-title">
+      Just for <span>You</span> 💗
+    </h1>
+
+    <p class="subtitle">
+      Two little memories, one big feeling,<br>
+      and something special waiting for you.
+    </p>
+
+    <div class="divider"></div>
+
+    <!-- YOUR TWO PHOTOS -->
+    <section class="photo-grid">
+      <article class="photo-card">
+        <img src="my-photo.jpg/846373177_1136854129286051_5362030790873652391_n.jpg"
+             alt="Your first favourite photo"
+             loading="eager">
+        <p class="photo-caption">A little sunshine 🌷</p>
+      </article>
+
+      <article class="photo-card">
+        <img src="my-photo.jpg/minrr.webp"
+             alt="Your second favourite photo"
+             loading="eager">
+        <p class="photo-caption">Someone very special 💕</p>
+      </article>
+    </section>
+
+    <!-- SURPRISE BUTTON AND VIDEO -->
+    <section class="surprise-card">
+      <div id="surpriseIntro">
+        <div class="surprise-rose">🌹</div>
+
+        <h2>Something Just for You</h2>
+
+        <p>
+          I have a little surprise waiting for you...<br>
+          Ready to open a tiny piece of my heart?
+        </p>
+
+        <button
+          class="surprise-btn"
+          id="surpriseBtn"
+          onclick="openSurprise()">
+          💌 Open Your Surprise
+        </button>
+      </div>
+
+      <div id="surpriseContent" class="hidden">
+        <h2>Just for You, My Love 💖</h2>
+
+        <p>A little surprise, made with love.</p>
+
+        <div class="video-frame">
+          <video
+            id="surpriseVideo"
+            controls
+            playsinline
+            preload="metadata"
+            poster="her-photo-1.jpg">
+
+            <source src="our-surprise.mp4" type="video/mp4">
+
+            Sorry, your browser cannot play this video.
+          </video>
+        </div>
+
+        <p class="video-caption">
+          Every little moment reminds me of you. 💗
+        </p>
+
+        <div class="divider"></div>
+
+        <p class="love-message">
+          I'm sorry for the moments I made you sad.<br>
+          You mean more to me than words can explain.<br>
+          I can't change the past, but I can try to make
+          the future kinder, happier, and full of smiles.<br><br>
+          I hope this little surprise makes you smile. 🥹❤️
+        </p>
+
+        <p style="margin-top: 18px; color: #e8c18a;">
+          Always wishing you happiness ✨
+        </p>
+      </div>
+    </section>
+
+    <!-- PAGE NAVIGATION -->
+    <nav class="navigation">
+      <a class="nav-link" href="page2.html">← Previous Page</a>
+      <a class="nav-link" href="page4.html">Next Page →</a>
+    </nav>
+
+    <footer>
+      Made with love, just for you. ♡
+    </footer>
+  </main>
+
+  <script>
+    // Create twinkling stars
+    const starsContainer = document.getElementById("stars");
+
+    for (let i = 0; i < 65; i++) {
+      const star = document.createElement("span");
+      star.className = "star";
+      star.style.left = Math.random() * 100 + "%";
+      star.style.top = Math.random() * 100 + "%";
+      star.style.animationDelay = Math.random() * 4 + "s";
+      star.style.animationDuration = (2 + Math.random() * 3) + "s";
+      starsContainer.appendChild(star);
+    }
+
+    // Open surprise and attempt to start video
+    function openSurprise() {
+      const intro = document.getElementById("surpriseIntro");
+      const content = document.getElementById("surpriseContent");
+      const video = document.getElementById("surpriseVideo");
+
+      intro.classList.add("hidden");
+      content.classList.remove("hidden");
+
+      // Start from the beginning
+      video.currentTime = 0;
+
+      // User clicked the button, so try to play the video
+      const playAttempt = video.play();
+
+      if (playAttempt !== undefined) {
+        playAttempt.catch(() => {
+          // If playback is blocked, she can tap Play on the video.
+          video.controls = true;
+        });
+      }
+
+      content.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+
+      // Floating hearts celebration
+      for (let i = 0; i < 22; i++) {
+        setTimeout(() => {
+          const heart = document.createElement("span");
+          heart.className = "floating-heart";
+          heart.textContent = ["💗", "💕", "💖", "✨", "🌸"][
+            Math.floor(Math.random() * 5)
+          ];
+
+          heart.style.left = Math.random() * 100 + "vw";
+          heart.style.fontSize = (16 + Math.random() * 20) + "px";
+          heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+          document.body.appendChild(heart);
+
+          setTimeout(() => heart.remove(), 6500);
+        }, i * 100);
+      }
+    }
+  </script>
+</body>
+</html>

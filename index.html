@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry Babeee 💗</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="container">
+        <section class="card page-content">
+
+            <div class="top-heart">💗</div>
+
+            <p class="small-text">A little message just for you...</p>
+
+            <h1>I'm Sorry Babeee 🥺</h1>
+
+            <p class="love-text">Please forgive me? 💕</p>
+
+            <p class="message">
+                You are so special to me.
+                I know I may have made a mistake,
+                and I'm truly sorry if I hurt you.
+                Please give me a chance to make it right. 🥹
+            </p>
+
+            <div class="big-heart">❤️</div>
+
+            <!-- OPTION 1 -->
+            <button id="yesBtn" class="yes-btn">
+                Okay, I forgive you babeee 💖
+            </button>
+
+            <!-- OPTION 2 -->
+            <button id="noBtn" class="no-btn">
+                No, I don't forgive you 😤
+            </button>
+
+            <!-- FORGIVEN MESSAGE -->
+            <div id="yesMessage" class="result-message" hidden>
+                <h2>YAYYYY! 🥹💗</h2>
+                <p>Thank you, babeee! Sending you the biggest hug! 🤗</p>
+                <p>I promise I'll try to do better. 💕</p>
+                <div class="result-emoji">😘💋💖</div>
+            </div>
+
+            <a class="btn back-link" href="page2.html">
+                Next Page ➜ 💌
+            </a>
+
+        </section>
+
+        <footer>Made with love, just for you 💗</footer>
+    </main>
+
+
+    <!-- POPUP FOR THE NO BUTTON -->
+    <div id="sorryModal" class="modal" hidden>
+        <div class="modal-box">
+
+            <button id="closeModal" class="close-btn"
+                    aria-label="Close popup">×</button>
+
+            <div class="modal-heart">🥺💗</div>
+
+            <h2>Waittt babeee! 😭</h2>
+
+            <p class="popup-text">
+                Please don't say nooo! 🥹💕
+                <br>
+                Look at these memories...
+                I just want to see you smile again.
+            </p>
+
+            <!-- PHOTO 1: CHANGE THIS FILE NAME -->
+            <img
+                class="popup-photo"
+                src="images/photo1.jpg"
+                alt="Our special memory"
+            >
+
+            <p class="popup-caption">
+                One of my favourite memories with you 💖
+            </p>
+
+            
+            <p class="popup-text">
+                You're important to me, babeee.
+                I'm sorry, and whenever you're ready,
+                I'd love to make things right. 💌
+            </p>
+
+            <button id="tryAgainBtn" class="yes-btn">
+                Okay, let me think 🥺💗
+            </button>
+
+            <button id="closeBtn" class="no-popup-btn">
+                Close popup
+            </button>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
